@@ -30,7 +30,12 @@ export default function StoreProvider({
     <Provider store={storeRef.current?.store}>
       {/* PersistGate to persist and rehydrate the store */}
       <PersistGate
-        loading={"Loading..."}
+        // loading={"Loading..."}
+        loading={
+          <div className="h-screen flex items-center justify-center">
+            <span className="text-2xl">Loading...</span>
+          </div>
+        }
         persistor={storeRef.current?.persistor}
       >
         {/* Render children only after persistence is complete */}
