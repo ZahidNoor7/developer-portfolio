@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import DefaultLoader from "@/components/Loaders/DefaultLoader";
 
 /**
  * StoreProvider Component:
@@ -33,7 +34,8 @@ export default function StoreProvider({
         // loading={"Loading..."}
         loading={
           <div className="h-screen flex items-center justify-center">
-            <span className="text-2xl">Loading...</span>
+            {/* <span className="text-2xl">Loading...</span> */}
+            <DefaultLoader />
           </div>
         }
         persistor={storeRef.current?.persistor}

@@ -7,16 +7,9 @@ import appPreferencesSlice from "./Reducers/appPreferencesSlice";
 
 // Configure Redux-Persist
 const persistConfig = {
-  key: "chatdox",
+  key: "portfolio",
   storage,
-  whitelist: [
-    "counter",
-    "userDetails",
-    "subscription",
-    "authentication",
-    "appPreferences",
-    "dataSources",
-  ], // Reducers to persist
+  whitelist: ["counter", "appPreferences"], // Reducers to persist
 };
 
 // Combine all the reducers into one
