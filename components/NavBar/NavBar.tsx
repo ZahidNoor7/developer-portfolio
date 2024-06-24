@@ -1,81 +1,185 @@
+"use client";
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 export default function Navbar() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const drawerRef = useRef<HTMLUListElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      drawerRef.current &&
+      !drawerRef.current.contains(event.target as Node)
+    ) {
+      setIsDrawerOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDrawerOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden"; // Disable scrolling on the body
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "auto"; // Re-enable scrolling on the body
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "auto"; // Ensure scrolling is re-enabled when component unmounts
+    };
+  }, [isDrawerOpen]);
+
   return (
-    <nav className="bg-transparent">
-      <div className="flex items-center justify-between py-5">
-        <div className="flex flex-shrink-0 items-center">
-          <Link href="/" className=" text-[#16f2b3] text-3xl font-bold">
+    <nav className="fixed w-full z-[100] left-0 right-0 bg-transparent backdrop-blur-lg m-auto lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
+      <div className="flex items-center justify-between py-4 px-4 md:px-8">
+        <div className="flex items-center">
+          <Link
+            href="/"
+            className="text-[#16f2b3] font-bold text-2xl lg:text-3xl"
+          >
             Muhammad Zahid Noor
           </Link>
         </div>
 
-        <ul
-          className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100"
-          id="navbar-default"
-        >
+        {/* Hamburger Menu */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+            className="text-white focus:outline-none"
+          >
+            {isDrawerOpen ? (
+              <AiOutlineClose size={24} />
+            ) : (
+              <AiOutlineMenu size={24} />
+            )}
+          </button>
+        </div>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex flex-row items-center space-x-4">
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
               href="/#about"
+              className="text-sm text-white transition-colors duration-300 hover:text-pink-600"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                ABOUT
-              </div>
+              ABOUT
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
               href="/#experience"
+              className="text-sm text-white transition-colors duration-300 hover:text-pink-600"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                EXPERIENCE
-              </div>
+              EXPERIENCE
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
               href="/#skills"
+              className="text-sm text-white transition-colors duration-300 hover:text-pink-600"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                SKILLS
-              </div>
+              SKILLS
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
               href="/#projects"
+              className="text-sm text-white transition-colors duration-300 hover:text-pink-600"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                PROJECTS
-              </div>
+              PROJECTS
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
               href="/#education"
+              className="text-sm text-white transition-colors duration-300 hover:text-pink-600"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                EDUCATION
-              </div>
+              EDUCATION
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
               href="/#contact"
+              className="text-sm text-white transition-colors duration-300 hover:text-pink-600"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                CONTACT
-              </div>
+              CONTACT
             </Link>
           </li>
         </ul>
       </div>
+
+      {/* Responsive Drawer Menu */}
+      <ul
+        ref={drawerRef}
+        className={`md:hidden fixed right-0 top-0 h-screen w-64 bg-black backdrop-blur-lg z-50 p-5 space-y-2 transition-transform duration-300 ${
+          isDrawerOpen
+            ? "transform translate-x-0"
+            : "transform translate-x-full"
+        }`}
+      >
+        <button
+          onClick={() => setIsDrawerOpen(false)}
+          className="absolute top-4 right-4 text-white focus:outline-none"
+        >
+          <AiOutlineClose size={24} />
+        </button>
+        <li>
+          <Link
+            href="/#about"
+            className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-600"
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            ABOUT
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/#experience"
+            className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-600"
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            EXPERIENCE
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/#skills"
+            className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-600"
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            SKILLS
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/#projects"
+            className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-600"
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            PROJECTS
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/#education"
+            className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-600"
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            EDUCATION
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/#contact"
+            className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-600"
+            onClick={() => setIsDrawerOpen(false)}
+          >
+            CONTACT
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 }

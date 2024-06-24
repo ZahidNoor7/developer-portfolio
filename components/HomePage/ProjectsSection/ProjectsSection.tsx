@@ -15,11 +15,11 @@ const ProjectsSection: React.FC = () => {
     <div id="projects" className="relative z-40 my-12 lg:my-24">
       <div className="sticky top-10">
         {/* Decorative Blur Element */}
-        <div className="w-[80px] h-[80px] bg-violet-100 rounded-full absolute -top-3 left-0 translate-x-1/2 filter blur-3xl opacity-30"></div>
+        <div className="w-[80px] h-[80px] bg-violet-100 rounded-full absolute -top-3 left-1/2 transform -translate-x-1/2 filter blur-3xl opacity-30"></div>
 
         {/* Header Section */}
         <div className="flex items-center justify-start relative">
-          <span className="bg-[#1a1443] absolute left-0 w-fit text-white px-5 py-3 text-xl rounded-md">
+          <span className="bg-[#1a1443] absolute left-1/2 transform -translate-x-1/2 w-fit text-white px-5 py-3 text-xl rounded-md">
             PROJECTS
           </span>
           <span className="w-full h-[2px] bg-[#1a1443]"></span>
@@ -28,7 +28,7 @@ const ProjectsSection: React.FC = () => {
 
       {/* Project Cards Section */}
       <div className="pt-24">
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-12 lg:gap-24">
           {projectDetails.map((project: Project, index: number) => (
             <div
               key={project.id}
@@ -36,7 +36,7 @@ const ProjectsSection: React.FC = () => {
               className="sticky-card w-full mx-auto max-w-4xl sticky top-[20px]"
             >
               <Link target="_blank" href={`/project/${project.id}`}>
-                <div className="box-border flex items-center justify-center rounded shadow-lg transition-transform duration-500 hover:scale-105 mb-20 hover:z-50">
+                <div className="box-border flex items-center justify-center rounded shadow-lg transition-transform duration-500 hover:scale-100 mb-12 lg:mb-20 hover:z-30 lg:hover:scale-105">
                   <ProjectCard project={project} />
                 </div>
               </Link>
@@ -46,7 +46,7 @@ const ProjectsSection: React.FC = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-3xl" style={{ paddingBottom: "20px" }}>
+        <h1 className="text-xl lg:text-3xl pb-5">
           Days I <strong className="text-[#14F2B2]">Code</strong>
         </h1>
         <GitHubCalendar

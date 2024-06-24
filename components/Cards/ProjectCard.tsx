@@ -1,4 +1,3 @@
-// import Link from "next/link";
 import Image from "next/image";
 import * as React from "react";
 import { Project } from "@/types/types";
@@ -16,24 +15,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
         <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
       </div>
-      <div className="px-4 lg:px-8 py-3 lg:py-5 relative">
-        <div className="flex flex-row space-x-1 lg:space-x-2 absolute top-1/2 -translate-y-1/2">
-          <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-red-400"></div>
-          <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-orange-400"></div>
-          <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-green-200"></div>
+      <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-5 relative">
+        <div className="flex flex-row space-x-1 sm:space-x-2 absolute top-1/2 -translate-y-1/2">
+          <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-red-400"></div>
+          <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-orange-400"></div>
+          <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-green-200"></div>
         </div>
-        <p className="text-center ml-3 text-[#16f2b3] text-base lg:text-xl">
+        <p className="text-center ml-3 text-[#16f2b3] text-sm sm:text-base lg:text-xl">
           {project.name}
         </p>
       </div>
       <div
-        className={`flex overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 ${
+        className={`flex flex-col lg:flex-row overflow-hidden border-t-[2px] border-indigo-900 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 ${
           hasImages ? "gap-4" : ""
         }`}
       >
         <code
-          className={`font-mono text-xs md:text-sm lg:text-base ${
-            hasImages ? "basis-3/5" : "w-full"
+          className={`font-mono text-xs sm:text-sm lg:text-base ${
+            hasImages ? "lg:basis-3/5" : "w-full"
           }`}
         >
           <div className="blink">
@@ -43,13 +42,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <span className="text-gray-400">{"{"}</span>
           </div>
           <div>
-            <span className="ml-4 lg:ml-8 mr-2 text-white">name:</span>
+            <span className="ml-4 sm:ml-6 lg:ml-8 mr-2 text-white">name:</span>
             <span className="text-gray-400">{`'`}</span>
             <span className="text-amber-300">{project.name}</span>
             <span className="text-gray-400">{`',`}</span>
           </div>
 
-          <div className="ml-4 lg:ml-8 mr-2">
+          <div className="ml-4 sm:ml-6 lg:ml-8 mr-2">
             <span className=" text-white">tools:</span>
             <span className="text-gray-400">{` ['`}</span>
             {project.tools.map((tag, i) => (
@@ -63,11 +62,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <span className="text-gray-400">{"],"}</span>
           </div>
           <div>
-            <span className="ml-4 lg:ml-8 mr-2 text-white">myRole:</span>
+            <span className="ml-4 sm:ml-6 lg:ml-8 mr-2 text-white">
+              myRole:
+            </span>
             <span className="text-orange-400">{project.role}</span>
             <span className="text-gray-400">,</span>
           </div>
-          <div className="ml-4 lg:ml-8 mr-2">
+          <div className="ml-4 sm:ml-6 lg:ml-8 mr-2">
             <span className="text-white">Description:</span>
             <span className="text-cyan-400">{" " + project.description}</span>
             <span className="text-gray-400">,</span>
@@ -77,8 +78,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </div>
         </code>
         {hasImages && (
-          <div className="basis-2/5 relative">
-            {/* <Link target="_blank" href={project.demo}> */}
+          <div className="lg:basis-2/5 relative mt-4 lg:mt-0">
             <div className="grid grid-cols-2 gap-2 transform transition-transform duration-500 group-hover:scale-105">
               {project.images.slice(0, 4).map((image, index) => (
                 <div key={index} className="relative">
@@ -92,7 +92,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 </div>
               ))}
             </div>
-            {/* </Link> */}
           </div>
         )}
       </div>
